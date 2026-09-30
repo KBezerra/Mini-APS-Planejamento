@@ -18,13 +18,12 @@
 
 ## 📌 O problema
 
-A programação manual, item por item, gerava três dores recorrentes:
+A programação manual, item por item, gerava dores recorrentes:
 
 | ❌ Antes | ✅ Depois (Mini-APS) |
 |---|---|
 | Carga empilhada nos primeiros dias do calendário | Curva de produção plana, nivelada automaticamente |
 | Estouro de capacidade sem aviso | Múltiplos tetos checados em tempo real |
-| Item não programado, sem explicação | Log automático do motivo exato do bloqueio |
 
 ## 🚀 Diferenciais técnicos
 
