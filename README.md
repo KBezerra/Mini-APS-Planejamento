@@ -1,59 +1,49 @@
-<div align="center">
-
 # ⚙️ Mini-APS — Sistema de Planejamento de Produção
 
-**Automação em VBA que distribui um plano de produção no calendário — respeitando capacidade, tempo de cura e prioridade.**
+![VBA](https://img.shields.io/badge/VBA-2C5FA6?style=flat-square&logo=microsoft&logoColor=white)
+![Excel](https://img.shields.io/badge/Excel-217346?style=flat-square&logo=microsoftexcel&logoColor=white)
 
-![VBA](https://img.shields.io/badge/VBA-2C5FA6?style=for-the-badge&logo=microsoft&logoColor=white)
-![Excel](https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)
+Projeto de portfólio, dados fictícios — mas a lógica é real, nascida de um problema que enfrentei num ambiente industrial: distribuir um plano de produção sem virar um Tetris manual toda semana.
 
-</div>
+## 🎬 Demonstração
 
----
-
-> 💡 Projeto de demonstração técnica, com dados e parâmetros fictícios.
-
-> 🏭 Este projeto simula um sistema de planejamento de produção (APS), inspirado em desafios reais de nivelamento de capacidade e priorização que venho enfrentando na minha atuação profissional em ambientes industriais.
+<!-- GIF: a macro rodando do início ao fim — plano "cru" → curva nivelando → resumo final -->
+![Demo rodando](screenshots/demo-execucao.gif)
 
 ## 📌 O problema
 
-A programação manual, item por item, gerava dores recorrentes:
+Programar à mão sempre empilha os primeiros dias do calendário (é onde "cabe mais fácil" na hora), e quando um item não entrava no plano, ninguém sabia dizer o porquê sem investigar linha por linha.
 
-| ❌ Antes | ✅ Depois (Mini-APS) |
-|---|---|
-| Carga empilhada nos primeiros dias do calendário | Curva de produção plana, nivelada automaticamente |
-| Estouro de capacidade sem aviso | Múltiplos tetos checados em tempo real |
+## 🧠 Como funciona
 
-## 🚀 Diferenciais técnicos
+🌊 **Valley-fill:** em vez de programar em ordem cronológica, o algoritmo sempre aloca no dia com menos carga no momento — recalculando a cada lote. Roda em duas passadas: nivelamento geral, depois pente-fino nas sobras.
 
-| | Recurso | O que faz |
-|---|---|---|
-| 🌊 | **Valley-Fill anti-cascata** | Sempre aloca no dia com menor carga do momento (não em ordem cronológica), recalculando a cada lote. Roda em 2 fases: nivelamento até um alvo diário, depois pente-fino nas sobras até o teto. |
-| 🔮 | **Forward Window Checking** | Como a alocação pula dias, o sistema verifica se o molde fica livre durante *toda* a janela de cura à frente — não só no dia da alocação — evitando colisão com a cura de outro lote. |
-| 🎯 | **Score de prioridade** | Ordena por urgência → tipo de recurso (máquina) → fator de gargalo (`plano ÷ moldes disponíveis × leadtime`) → volume. Itens mais restritos entram primeiro, enquanto ainda há espaço. |
-| 🟩 | **Células fixas (fundo verde)** | Ordens travadas manualmente na planilha são reconhecidas, preservadas e descontadas do saldo — o plano se adapta *ao redor* delas, sem sobrepor. |
-| 🧱 | **Múltiplos tetos simultâneos** | Fábrica, máquina, 4 categorias de produto e capacidade individual por item — o menor espaço disponível sempre prevalece. |
-| 📦 | **Lote mínimo estrito** | Evita fracionamento excessivo, com exceção só quando o próprio plano/moldes já é menor que o mínimo. |
-| 🧾 | **Log de motivo residual** | Quando um item não é 100% alocado, o motivo exato é gravado automaticamente (teto atingido, falta de molde, sem dias disponíveis). |
-| 📊 | **Resumo executivo** | Ao final, mostra total alocado, saldo residual, média diária, dia mais alto/baixo e dias acima do teto. |
+🔮 **Moldes não são infinitos:** cada item "cura" por um tempo depois de produzido, ocupando o molde. Como a alocação pula de dia em dia, o sistema checa se o molde fica livre em *toda* a janela de cura à frente — não só no dia da alocação.
 
-## 🔄 Fluxo de execução
+🎯 **Prioridade:** urgência manda mais que tudo; depois entra o gargalo — quanto menos molde disponível pro volume necessário, mais cedo o item é processado.
 
-```mermaid
-flowchart LR
-    A[🟩 Fase 0\nTrava células fixas] --> B[🌊 Fase 1\nNivela até o alvo diário]
-    B --> C[📦 Fase 2\nPente-fino nas sobras]
-    C --> D[🧾 Grava resultado\n+ log + resumo]
-```
+🟩 **Células verdes são sagradas:** ordens travadas manualmente na planilha são preservadas, descontadas da capacidade do dia, e o resto do plano se ajusta ao redor — nunca por cima.
 
-## 🛠️ Tecnologias
+<!-- Foto: uma célula verde travada com o plano se ajustando ao redor dela -->
+![Células verdes sendo respeitadas](screenshots/celulas-verdes.png)
 
-`VBA` · `Excel` · estrutura de dados tipada · forward window checking
+🧾 **Quando algo não cabe, o sistema explica:** teto batido, falta de molde, categoria lotada — cada residual vem com o motivo anotado.
+
+## 🧱 Regras de capacidade
+
+*(Todas ao mesmo tempo — a mais apertada vence)*
+
+🏭 Fábrica · ⚙️ Máquina · 📦 Categoria de produto (4 tipos) · 🔧 Moldes por item · 📏 Lote mínimo
+
+## 🔄 Fluxo
+
+`🟩 trava o fixo (se houver)` → `🌊 nivela o vale` → `📦 pente-fino` → `🧾 grava motivo` → `📊 resumo final`
+
+## 🛠️ Stack
+
+VBA puro, dentro do próprio Excel. Sem add-in, sem dependência externa.
 
 ---
 
-<div align="center">
+📁 Projeto de portfólio, dados fictícios. Direitos reservados ao autor.
 
-📁 Projeto de portfólio com dados fictícios · Todos os direitos reservados ao autor
-
-</div>
