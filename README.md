@@ -6,7 +6,6 @@
 
 ![VBA](https://img.shields.io/badge/VBA-2C5FA6?style=for-the-badge&logo=microsoft&logoColor=white)
 ![Excel](https://img.shields.io/badge/Excel-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white)
-![Status](https://img.shields.io/badge/status-portfolio-blue?style=for-the-badge)
 
 </div>
 
