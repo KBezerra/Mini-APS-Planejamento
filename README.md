@@ -8,7 +8,7 @@ Projeto de portfólio, dados fictícios — mas a lógica é real, nascida de um
 ## 🎬 Demonstração
 
 <!-- GIF: a macro rodando do início ao fim — plano "cru" → curva nivelando → resumo final -->
-![Demo rodando](screenshots/demo-execucao.gif)
+![Demo rodando](screenshots/gif1.mp4)
 
 ## 📌 O problema
 
@@ -25,7 +25,7 @@ Programar à mão sempre empilha os primeiros dias do calendário (é onde "cabe
 🟩 **Células verdes são sagradas:** ordens travadas manualmente na planilha são preservadas, descontadas da capacidade do dia, e o resto do plano se ajusta ao redor — nunca por cima.
 
 <!-- Foto: uma célula verde travada com o plano se ajustando ao redor dela -->
-![Células verdes sendo respeitadas](screenshots/celulas-verdes.png)
+![Células verdes sendo respeitadas](screenshots/gif2.mp4)
 
 🧾 **Quando algo não cabe, o sistema explica:** teto batido, falta de molde, categoria lotada — cada residual vem com o motivo anotado.
 
